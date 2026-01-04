@@ -1,13 +1,13 @@
-// DAO: Data access object for Short URL
+// DAO: Data Access Object
 
 import urlSchema from '../models/short_url.model.js';
 import { ConflictError } from '../utils/errorHandler.js';
 
-export const saveShortUrl = async (fullUrl, shortUrl, userId) => {
+export const saveShortUrl = async ({fullUrl, shortUrl, userId}) => {
     try{
         const newUrl = new urlSchema({ fullUrl, shortUrl });
         if (userId) {
-            newUrl.user_id = userId;
+            newUrl.userId = userId;
         }
         await newUrl.save();
     }catch(err){
